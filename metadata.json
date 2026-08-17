@@ -1,0 +1,6 @@
+{
+  "name": "Palavra Diária ARA - Fé e Natureza",
+  "description": "Aplicativo de reflexões e mensagens diárias de fé baseadas na Bíblia Sagrada ARA, organizadas por dias da semana e acompanhadas por imagens da natureza real.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
