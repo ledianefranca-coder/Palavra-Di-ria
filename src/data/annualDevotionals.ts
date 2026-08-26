@@ -1,4 +1,5 @@
 import { DailyReflection, DayOfWeekName, DevotionalCategory, NatureCategory } from "../types";
+import { NATURE_IMAGE_GALLERY } from "./natureImages";
 
 type PassageSeed = {
   title: string;
@@ -66,17 +67,6 @@ const LENSES: DailyLens[] = [
   { category: "Para dormir", title: "Noite de proteção", invitation: "Você pode fechar os olhos sem fechar o coração para a confiança: a presença de Deus envolve sua casa.", action: "Ore por cada pessoa do seu lar e encerre o dia sem consultar novamente as preocupações." },
 ];
 
-const IMAGES: Record<NatureCategory, { url: string; location: string }> = {
-  lago: { url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1920&auto=format&fit=crop", location: "Águas tranquilas entre montanhas" },
-  montanhas: { url: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1920&auto=format&fit=crop", location: "Montanhas ao amanhecer" },
-  floresta: { url: "https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=1920&auto=format&fit=crop", location: "Trilha iluminada na floresta" },
-  porsol: { url: "https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?q=80&w=1920&auto=format&fit=crop", location: "Pôr do sol sobre o mar" },
-  cachoeira: { url: "https://images.unsplash.com/photo-1432405972618-c60b0225b8c9?q=80&w=1920&auto=format&fit=crop", location: "Cachoeira de águas renovadoras" },
-  flores: { url: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?q=80&w=1920&auto=format&fit=crop", location: "Jardim em florescimento" },
-  ceu: { url: "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=1920&auto=format&fit=crop", location: "Céu estrelado e sereno" },
-  campo: { url: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1920&auto=format&fit=crop", location: "Campo dourado ao amanhecer" },
-};
-
 function dateForDay(day: number) {
   const date = new Date(2025, 0, day);
   return `${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
@@ -87,7 +77,8 @@ export const ANNUAL_DEVOTIONALS: DailyReflection[] = Array.from({ length: 365 },
   const passage = PASSAGES[index % PASSAGES.length];
   const lens = LENSES[Math.floor(index / PASSAGES.length) % LENSES.length];
   const calendarDate = new Date(2025, 0, day);
-  const image = IMAGES[passage.image];
+  const imageOptions = NATURE_IMAGE_GALLERY.filter((image) => image.category === passage.image);
+  const image = imageOptions[Math.floor(index / PASSAGES.length) % imageOptions.length] || NATURE_IMAGE_GALLERY[0];
 
   return {
     id: `dev-${String(day).padStart(3, "0")}`,
