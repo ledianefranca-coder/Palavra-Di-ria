@@ -111,5 +111,24 @@ export const ANNUAL_DEVOTIONALS: DailyReflection[] = Array.from({ length: 365 },
 
 export const getTodayDevotional = (date = new Date()) => {
   const key = `${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
-  return ANNUAL_DEVOTIONALS.find((item) => item.dateKey === key) || ANNUAL_DEVOTIONALS[0];
+  const devotional = ANNUAL_DEVOTIONALS.find((item) => item.dateKey === key) || ANNUAL_DEVOTIONALS[0];
+  return {
+    ...devotional,
+    dayOfWeekCode: date.getDay(),
+    dayOfWeekName: DAY_NAMES[date.getDay()],
+  };
+};
+
+export const getWeekDevotionals = (date = new Date()) => {
+  const mondayOffset = date.getDay() === 0 ? -6 : 1 - date.getDay();
+  const monday = new Date(date.getFullYear(), date.getMonth(), date.getDate() + mondayOffset);
+
+  return Array.from({ length: 7 }, (_, index) => {
+    const weekDate = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + index);
+    return {
+      date: weekDate,
+      devotional: getTodayDevotional(weekDate),
+      isToday: weekDate.toDateString() === date.toDateString(),
+    };
+  });
 };

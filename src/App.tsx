@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Header } from "./components/Header";
 import { AnnualNavigator } from "./components/AnnualNavigator";
+import { WeekOverview } from "./components/WeekOverview";
 import { DailyCard } from "./components/DailyCard";
 import { BackgroundPickerModal } from "./components/BackgroundPickerModal";
 import { ShareCardModal } from "./components/ShareCardModal";
@@ -218,7 +219,7 @@ export default function App() {
         )}
 
         {/* Tab 1: Today & Week Selection */}
-        {(activeTab === "today" || activeTab === "week") && (
+        {activeTab === "today" && (
           <div className="space-y-6">
             <AnnualNavigator
               dateKey={currentReflection.dateKey}
@@ -246,6 +247,16 @@ export default function App() {
               onToggleCompleted={() => setCompletedDays((current) => current.includes(currentReflection.id) ? current.filter((id) => id !== currentReflection.id) : [...current, currentReflection.id])}
             />
           </div>
+        )}
+
+        {activeTab === "week" && (
+          <WeekOverview
+            onSelect={(reflection) => {
+              setCurrentReflection(reflection);
+              setSelectedCategory("Todas");
+              setActiveTab("today");
+            }}
+          />
         )}
 
         {/* Tab 2: AI Reflection Trigger */}
