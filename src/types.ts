@@ -17,6 +17,15 @@ export type NatureCategory =
   | "ceu"
   | "campo";
 
+export type DevotionalCategory =
+  | "Paz"
+  | "Coragem"
+  | "Gratidão"
+  | "Recomeço"
+  | "Esperança"
+  | "Família"
+  | "Para dormir";
+
 export interface DailyReflection {
   id: string;
   dayOfWeekCode: number; // 0 = Domingo, 1 = Segunda, etc.
@@ -33,6 +42,9 @@ export interface DailyReflection {
   bgLocation: string;
   photographerCredit?: string;
   tags: string[];
+  dateKey?: string;
+  category?: DevotionalCategory;
+  dayOfYear?: number;
 }
 
 export interface NatureImageOption {

@@ -24,6 +24,8 @@ interface DailyCardProps {
   onOpenImagePicker: () => void;
   onOpenShare: () => void;
   onOpenImmersive: () => void;
+  isCompleted: boolean;
+  onToggleCompleted: () => void;
 }
 
 export const DailyCard: React.FC<DailyCardProps> = ({
@@ -33,8 +35,9 @@ export const DailyCard: React.FC<DailyCardProps> = ({
   onOpenImagePicker,
   onOpenShare,
   onOpenImmersive,
+  isCompleted,
+  onToggleCompleted,
 }) => {
-  const [isCompletedAction, setIsCompletedAction] = useState(false);
   const [isSpeechReading, setIsSpeechReading] = useState(false);
   const [showPrayer, setShowPrayer] = useState(true);
 
@@ -196,14 +199,14 @@ export const DailyCard: React.FC<DailyCardProps> = ({
 
         {/* Practical Action Box */}
         <div
-          onClick={() => setIsCompletedAction(!isCompletedAction)}
+          onClick={onToggleCompleted}
           className={`p-4 rounded-2xl border transition cursor-pointer flex items-center gap-3.5 ${
-            isCompletedAction
+            isCompleted
               ? "bg-emerald-950/60 border-emerald-500 text-emerald-100"
               : "bg-[#f8f5ef] border-[#ded5c7] text-[#5d5e55] hover:border-[#b9a98f]"
           }`}
         >
-          <div className={`p-2 rounded-xl shrink-0 ${isCompletedAction ? "bg-emerald-600 text-white" : "bg-[#e9e3d8] text-[#77736a]"}`}>
+          <div className={`p-2 rounded-xl shrink-0 ${isCompleted ? "bg-emerald-600 text-white" : "bg-[#e9e3d8] text-[#77736a]"}`}>
             <CheckCircle2 className="w-5 h-5" />
           </div>
           <div className="flex-1 min-w-0">
@@ -211,7 +214,7 @@ export const DailyCard: React.FC<DailyCardProps> = ({
               <span className="text-xs font-bold uppercase tracking-wider text-[#8a6747]">
                 Atitude Prática do Dia
               </span>
-              {isCompletedAction && (
+              {isCompleted && (
                 <span className="text-[10px] bg-emerald-600 text-white font-bold px-2 py-0.5 rounded-full">
                   Concluído!
                 </span>

@@ -27,17 +27,17 @@ export const ShareCardModal: React.FC<ShareCardModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-      <div className="bg-stone-900 border border-stone-800 text-stone-100 rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl flex flex-col">
+      <div className="bg-[#fffdfa] border border-[#ded5c7] text-[#47483f] rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl flex flex-col">
         
         {/* Header */}
-        <div className="p-4 border-b border-stone-800 flex items-center justify-between">
-          <h3 className="text-base font-serif font-bold text-amber-100 flex items-center gap-2">
+        <div className="p-4 border-b border-[#ded5c7] flex items-center justify-between bg-[#f7f3eb]">
+          <h3 className="text-base font-serif font-bold text-[#504638] flex items-center gap-2">
             <Share2 className="w-5 h-5 text-emerald-400" />
             Compartilhar Palavra de Fé
           </h3>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full text-stone-400 hover:text-white hover:bg-stone-800 transition"
+            className="p-1.5 rounded-full text-[#77736a] hover:text-[#3f4038] hover:bg-[#e9e3d8] transition"
           >
             <X className="w-5 h-5" />
           </button>
@@ -105,7 +105,7 @@ export const ShareCardModal: React.FC<ShareCardModalProps> = ({
           <div className="grid grid-cols-2 gap-3">
             <button
               onClick={() => handleCopy(`"${reflection.verseText}" — ${reflection.verseReference}`, "verse")}
-              className="py-2.5 px-3 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-200 text-xs font-medium border border-stone-700 transition flex items-center justify-center gap-2"
+              className="py-2.5 px-3 rounded-xl bg-[#f3eee5] hover:bg-[#e8e1d5] text-[#5d5e55] text-xs font-medium border border-[#d8cfc2] transition flex items-center justify-center gap-2"
             >
               {copiedType === "verse" ? (
                 <>
@@ -122,7 +122,7 @@ export const ShareCardModal: React.FC<ShareCardModalProps> = ({
 
             <button
               onClick={() => handleCopy(`${reflection.title}\n\n${reflection.reflectionText}\n\nOração: ${reflection.prayer}`, "full")}
-              className="py-2.5 px-3 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-200 text-xs font-medium border border-stone-700 transition flex items-center justify-center gap-2"
+              className="py-2.5 px-3 rounded-xl bg-[#f3eee5] hover:bg-[#e8e1d5] text-[#5d5e55] text-xs font-medium border border-[#d8cfc2] transition flex items-center justify-center gap-2"
             >
               {copiedType === "full" ? (
                 <>

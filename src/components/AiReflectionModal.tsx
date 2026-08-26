@@ -17,6 +17,7 @@ const PRESET_FEELINGS = [
   { label: "Tomar Decisões", topic: "direção divina e sabedoria para escolhas importantes", icon: "🧭" },
   { label: "Saúde e Cura", topic: "restauração da saúde física, emocional e espiritual", icon: "🌿" },
   { label: "Esperança e Futuro", topic: "confiar nos planos de Deus para o amanhã", icon: "🌅" },
+  { label: "Para Dormir", topic: "entregar as preocupações a Deus, aquietar a mente e dormir em paz", icon: "🌙" },
 ];
 
 export const AiReflectionModal: React.FC<AiReflectionModalProps> = ({
@@ -86,26 +87,26 @@ export const AiReflectionModal: React.FC<AiReflectionModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-      <div className="bg-stone-900 border border-stone-800 text-stone-100 rounded-3xl max-w-xl w-full shadow-2xl overflow-hidden flex flex-col">
+      <div className="bg-[#fffdfa] border border-[#ded5c7] text-[#4b4c43] rounded-3xl max-w-xl w-full shadow-2xl overflow-hidden flex flex-col">
         
         {/* Header */}
-        <div className="p-5 border-b border-stone-800 flex items-center justify-between bg-stone-900">
+        <div className="p-5 border-b border-[#ded5c7] flex items-center justify-between bg-[#f7f3eb]">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-emerald-950 border border-emerald-500/40 text-emerald-400">
+            <div className="p-2 rounded-xl bg-[#e6ede4] border border-[#b8c9b7] text-[#46614b]">
               <Sparkles className="w-5 h-5 animate-pulse" />
             </div>
             <div>
-              <h3 className="text-lg font-serif font-bold text-amber-100">
+              <h3 className="text-lg font-serif font-bold text-[#504638]">
                 Reflexão Bíblica Personalizada
               </h3>
-              <p className="text-xs text-stone-400">
+              <p className="text-xs text-[#77736a]">
                 Alimentado pela IA do Gemini com base na Bíblia Sagrada ARA
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-full text-stone-400 hover:text-white hover:bg-stone-800 transition"
+            className="p-2 rounded-full text-[#77736a] hover:text-[#3f4038] hover:bg-[#ebe6dc] transition"
           >
             <X className="w-5 h-5" />
           </button>
@@ -120,7 +121,7 @@ export const AiReflectionModal: React.FC<AiReflectionModalProps> = ({
           )}
 
           <div>
-            <label className="block text-xs font-bold text-amber-200/90 uppercase tracking-wider mb-2">
+            <label className="block text-xs font-bold text-[#76583d] uppercase tracking-wider mb-2">
               Como você está se sentindo hoje? Escolha um tema:
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -129,7 +130,7 @@ export const AiReflectionModal: React.FC<AiReflectionModalProps> = ({
                   key={idx}
                   disabled={loading}
                   onClick={() => handleGenerate(item.topic)}
-                  className="flex items-center gap-2 p-2.5 rounded-xl bg-stone-800/80 hover:bg-emerald-900/60 border border-stone-700/60 hover:border-emerald-500 text-stone-200 hover:text-white text-xs font-medium transition text-left group"
+                  className="flex items-center gap-2 p-2.5 rounded-xl bg-[#f6f1e8] hover:bg-[#e6ede4] border border-[#ded5c7] hover:border-[#8faa91] text-[#5e5f56] hover:text-[#36503c] text-xs font-medium transition text-left group"
                 >
                   <span className="text-base group-hover:scale-110 transition-transform">
                     {item.icon}
@@ -142,17 +143,17 @@ export const AiReflectionModal: React.FC<AiReflectionModalProps> = ({
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-stone-800"></div>
+              <div className="w-full border-t border-[#ded5c7]"></div>
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-stone-900 px-2 text-stone-500 font-semibold">
+              <span className="bg-[#fffdfa] px-2 text-[#8a867d] font-semibold">
                 Ou digite seu pedido
               </span>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-stone-300 mb-1.5">
+            <label className="block text-xs font-medium text-[#686960] mb-1.5">
               Escreva um motivo, versículo ou dúvida do seu coração:
             </label>
             <div className="flex items-center gap-2">
@@ -161,7 +162,7 @@ export const AiReflectionModal: React.FC<AiReflectionModalProps> = ({
                 value={customInput}
                 onChange={(e) => setCustomInput(e.target.value)}
                 placeholder="Ex: Preciso de sabedoria para decidir sobre meu emprego..."
-                className="flex-1 bg-stone-950 border border-stone-700 focus:border-amber-500 rounded-xl px-4 py-3 text-sm text-stone-100 placeholder-stone-500 outline-none transition"
+                className="flex-1 bg-[#fbf9f4] border border-[#d8cfc2] focus:border-[#8a6747] rounded-xl px-4 py-3 text-sm text-[#44453d] placeholder:text-[#969188] outline-none transition"
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleGenerate();
                 }}
@@ -169,7 +170,7 @@ export const AiReflectionModal: React.FC<AiReflectionModalProps> = ({
               <button
                 disabled={loading || !customInput.trim()}
                 onClick={() => handleGenerate()}
-                className="px-5 py-3 rounded-xl bg-amber-600 hover:bg-amber-500 disabled:opacity-50 text-stone-950 font-bold text-sm transition flex items-center gap-2 shadow-lg shadow-amber-900/40"
+                className="px-5 py-3 rounded-xl bg-[#76583d] hover:bg-[#63482f] disabled:opacity-50 text-white font-bold text-sm transition flex items-center gap-2 shadow-lg shadow-[#76583d]/20"
               >
                 {loading ? (
                   <Loader2 className="w-5 h-5 animate-spin" />
@@ -183,7 +184,7 @@ export const AiReflectionModal: React.FC<AiReflectionModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-stone-800 bg-stone-950/60 text-center text-[11px] text-stone-400">
+        <div className="p-4 border-t border-[#ded5c7] bg-[#f3eee5] text-center text-[11px] text-[#77736a]">
           ✨ A IA gera respostas guiadas estritamente pela fidelidade bíblica da versão ARA.
         </div>
 

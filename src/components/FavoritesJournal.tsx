@@ -40,35 +40,35 @@ export const FavoritesJournal: React.FC<FavoritesJournalProps> = ({
   return (
     <div className="space-y-6">
       {/* Header & Search */}
-      <div className="bg-stone-900 border border-stone-800 rounded-3xl p-6 shadow-xl flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div className="bg-white/85 border border-[#ded5c7] rounded-3xl p-6 shadow-[0_15px_45px_rgba(72,67,54,0.1)] flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h2 className="text-xl font-serif font-bold text-amber-100 flex items-center gap-2">
+          <h2 className="text-xl font-serif font-bold text-[#504638] flex items-center gap-2">
             <Heart className="w-5 h-5 text-rose-400 fill-rose-400" />
             Meu Diário de Fé & Palavras Salvas
           </h2>
-          <p className="text-xs text-stone-400 mt-1">
+          <p className="text-xs text-[#77736a] mt-1">
             Seus versículos e reflexões guardados com carinho para momentos de meditação.
           </p>
         </div>
 
         <div className="relative w-full md:w-72">
-          <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#817d73] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Pesquisar nos salvos..."
-            className="w-full bg-stone-950 border border-stone-800 focus:border-amber-500 rounded-2xl pl-9 pr-4 py-2 text-xs text-stone-200 outline-none"
+            className="w-full bg-[#fbf9f4] border border-[#d8cfc2] focus:border-[#8a6747] rounded-2xl pl-9 pr-4 py-2.5 text-xs text-[#44453d] outline-none"
           />
         </div>
       </div>
 
       {/* List */}
       {filtered.length === 0 ? (
-        <div className="bg-stone-900/50 border border-stone-800 rounded-3xl p-12 text-center text-stone-400">
-          <Heart className="w-12 h-12 text-stone-600 mx-auto mb-3" />
-          <h3 className="text-base font-semibold text-stone-300">Nenhuma palavra salva ainda</h3>
-          <p className="text-xs text-stone-500 mt-1">
+        <div className="bg-white/60 border border-[#ded5c7] rounded-3xl p-12 text-center text-[#77736a]">
+          <Heart className="w-12 h-12 text-[#c5b9aa] mx-auto mb-3" />
+          <h3 className="text-base font-semibold text-[#55564d]">Nenhuma palavra salva ainda</h3>
+          <p className="text-xs text-[#8a867d] mt-1">
             Clique no ícone de coração nas reflexões diárias para guardá-las no seu diário de fé.
           </p>
         </div>
@@ -80,35 +80,35 @@ export const FavoritesJournal: React.FC<FavoritesJournalProps> = ({
             return (
               <div
                 key={fav.id}
-                className="bg-stone-900 border border-stone-800 rounded-2xl p-5 shadow-lg flex flex-col justify-between hover:border-stone-700 transition"
+                className="bg-[#fffdfa] border border-[#ded5c7] rounded-2xl p-5 shadow-[0_12px_35px_rgba(72,67,54,0.09)] flex flex-col justify-between hover:border-[#bba88d] transition"
               >
                 <div>
                   {/* Top info */}
-                  <div className="flex items-center justify-between text-xs text-stone-400 mb-2">
-                    <span className="px-2.5 py-0.5 rounded-full bg-amber-950 text-amber-300 border border-amber-800/50 font-bold">
+                  <div className="flex items-center justify-between text-xs text-[#77736a] mb-2">
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#eee2d1] text-[#76583d] border border-[#d8c4a8] font-bold">
                       {fav.reflection.dayOfWeekName}
                     </span>
                     <span className="text-[11px] text-stone-500">{fav.savedAt}</span>
                   </div>
 
-                  <h3 className="text-base font-serif font-bold text-amber-100 mb-2">
+                  <h3 className="text-base font-serif font-bold text-[#504638] mb-2">
                     {fav.reflection.title}
                   </h3>
 
                   {/* Verse quote box */}
-                  <div className="p-3 bg-stone-950 rounded-xl border border-stone-800/80 mb-3 relative">
+                  <div className="p-3 bg-[#f6f1e8] rounded-xl border border-[#e0d6c8] mb-3 relative">
                     <Quote className="w-4 h-4 text-stone-700 absolute top-2 right-2" />
-                    <p className="text-xs font-serif italic text-amber-200/90 leading-relaxed pr-5">
+                    <p className="text-xs font-serif italic text-[#665542] leading-relaxed pr-5">
                       "{fav.reflection.verseText}"
                     </p>
-                    <p className="text-[11px] font-bold text-emerald-400 text-right mt-1">
+                    <p className="text-[11px] font-bold text-[#4f6b54] text-right mt-1">
                       — {fav.reflection.verseReference}
                     </p>
                   </div>
 
                   {/* Notes Area */}
-                  <div className="mt-3 border-t border-stone-800/80 pt-3">
-                    <div className="flex items-center justify-between text-xs font-medium text-stone-400 mb-1">
+                  <div className="mt-3 border-t border-[#e0d6c8] pt-3">
+                    <div className="flex items-center justify-between text-xs font-medium text-[#77736a] mb-1">
                       <span>Anotação Pessoal / Pedido de Oração:</span>
                       {!isEditing && (
                         <button
@@ -126,7 +126,7 @@ export const FavoritesJournal: React.FC<FavoritesJournalProps> = ({
                           value={noteInput}
                           onChange={(e) => setNoteInput(e.target.value)}
                           placeholder="Escreva seus pensamentos ou motivo de oração..."
-                          className="w-full bg-stone-950 border border-stone-700 focus:border-amber-500 rounded-xl p-2.5 text-xs text-stone-200 outline-none h-20 resize-none"
+                          className="w-full bg-[#fbf9f4] border border-[#d8cfc2] focus:border-[#8a6747] rounded-xl p-2.5 text-xs text-[#44453d] outline-none h-20 resize-none"
                         />
                         <button
                           onClick={() => saveNote(fav.id)}
@@ -136,7 +136,7 @@ export const FavoritesJournal: React.FC<FavoritesJournalProps> = ({
                         </button>
                       </div>
                     ) : (
-                      <p className="text-xs text-stone-300 italic bg-stone-950/40 p-2 rounded-lg border border-stone-800/40">
+                      <p className="text-xs text-[#66675e] italic bg-[#f8f5ef] p-2 rounded-lg border border-[#e3dbcf]">
                         {fav.userNote || "Nenhuma anotação registrada."}
                       </p>
                     )}
@@ -144,7 +144,7 @@ export const FavoritesJournal: React.FC<FavoritesJournalProps> = ({
                 </div>
 
                 {/* Footer Buttons */}
-                <div className="flex items-center justify-between border-t border-stone-800 pt-3 mt-4">
+                <div className="flex items-center justify-between border-t border-[#e0d6c8] pt-3 mt-4">
                   <button
                     onClick={() => onSelectReflection(fav.reflection)}
                     className="text-xs font-semibold text-amber-400 hover:text-amber-300 flex items-center gap-1"

@@ -1,5 +1,6 @@
 import React from "react";
 import { BookOpen, Calendar, Sparkles, Heart, Volume2, VolumeX, Maximize2, Sprout } from "lucide-react";
+import { InstallAppButton } from "./InstallAppButton";
 
 interface HeaderProps {
   activeTab: "today" | "week" | "ai" | "favorites" | "sounds";
@@ -141,6 +142,7 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Desktop Right Actions */}
           <div className="hidden md:flex items-center gap-2">
+            <InstallAppButton />
             <button
               onClick={toggleAudio}
               className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium border transition ${

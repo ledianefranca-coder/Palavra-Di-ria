@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Header } from "./components/Header";
-import { WeekSelector } from "./components/WeekSelector";
+import { AnnualNavigator } from "./components/AnnualNavigator";
 import { DailyCard } from "./components/DailyCard";
 import { BackgroundPickerModal } from "./components/BackgroundPickerModal";
 import { ShareCardModal } from "./components/ShareCardModal";
@@ -8,22 +8,23 @@ import { AiReflectionModal } from "./components/AiReflectionModal";
 import { NatureSoundPlayer } from "./components/NatureSoundPlayer";
 import { FavoritesJournal } from "./components/FavoritesJournal";
 import { ImmersiveMode } from "./components/ImmersiveMode";
-import { WEEKLY_DEVOTIONALS, EXTRA_DEVOTIONALS } from "./data/dailyDevotionals";
-import { DailyReflection, SavedFavorite, NatureImageOption } from "./types";
+import { ANNUAL_DEVOTIONALS, getTodayDevotional } from "./data/annualDevotionals";
+import { DailyReflection, SavedFavorite, NatureImageOption, DevotionalCategory } from "./types";
 import { stopAmbientSound } from "./utils/audioSynthesizer";
 import { Sparkles, Search, TreePine, Leaf } from "lucide-react";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<"today" | "week" | "ai" | "favorites" | "sounds">("today");
   
-  // Today's day of week code (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
-  const todayCode = new Date().getDay();
-  const [selectedDayCode, setSelectedDayCode] = useState<number>(todayCode);
-
   // Active Daily Reflection
-  const [currentReflection, setCurrentReflection] = useState<DailyReflection>(() => {
-    const match = WEEKLY_DEVOTIONALS.find((d) => d.dayOfWeekCode === todayCode);
-    return match || WEEKLY_DEVOTIONALS[0];
+  const [currentReflection, setCurrentReflection] = useState<DailyReflection>(() => getTodayDevotional());
+  const [selectedCategory, setSelectedCategory] = useState<DevotionalCategory | "Todas">("Todas");
+  const [completedDays, setCompletedDays] = useState<string[]>(() => {
+    try {
+      return JSON.parse(localStorage.getItem("palavra_diaria_completed") || "[]");
+    } catch {
+      return [];
+    }
   });
 
   // Favorites state persisted in localStorage
@@ -55,13 +56,30 @@ export default function App() {
     }
   }, [favorites]);
 
-  // When selected day of week changes, update current reflection
-  const handleSelectDayCode = (code: number) => {
-    setSelectedDayCode(code);
-    const match = WEEKLY_DEVOTIONALS.find((d) => d.dayOfWeekCode === code);
-    if (match) {
-      setCurrentReflection(match);
+  useEffect(() => {
+    localStorage.setItem("palavra_diaria_completed", JSON.stringify(completedDays));
+  }, [completedDays]);
+
+  const visibleDevotionals = selectedCategory === "Todas"
+    ? ANNUAL_DEVOTIONALS
+    : ANNUAL_DEVOTIONALS.filter((item) => item.category === selectedCategory);
+
+  const moveReflection = (direction: -1 | 1) => {
+    const currentIndex = visibleDevotionals.findIndex((item) => item.id === currentReflection.id);
+    const safeIndex = currentIndex < 0 ? 0 : currentIndex;
+    const nextIndex = (safeIndex + direction + visibleDevotionals.length) % visibleDevotionals.length;
+    setCurrentReflection(visibleDevotionals[nextIndex]);
+  };
+
+  const handleCategoryChange = (category: DevotionalCategory | "Todas") => {
+    setSelectedCategory(category);
+    if (category === "Todas") {
+      setCurrentReflection(getTodayDevotional());
+      return;
     }
+    const categoryItems = ANNUAL_DEVOTIONALS.filter((item) => item.category === category);
+    const todayNumber = getTodayDevotional().dayOfYear || 1;
+    setCurrentReflection(categoryItems.find((item) => (item.dayOfYear || 0) >= todayNumber) || categoryItems[0]);
   };
 
   // Toggle favorite status
@@ -109,7 +127,7 @@ export default function App() {
   };
 
   // Combine all devotionals for search
-  const allDevotionals = [...WEEKLY_DEVOTIONALS, ...EXTRA_DEVOTIONALS];
+  const allDevotionals = ANNUAL_DEVOTIONALS;
   const searchResults = searchTerm.trim()
     ? allDevotionals.filter(
         (d) =>
@@ -202,10 +220,19 @@ export default function App() {
         {/* Tab 1: Today & Week Selection */}
         {(activeTab === "today" || activeTab === "week") && (
           <div className="space-y-6">
-            <WeekSelector
-              selectedDayCode={selectedDayCode}
-              onSelectDayCode={handleSelectDayCode}
-              todayCode={todayCode}
+            <AnnualNavigator
+              dateKey={currentReflection.dateKey}
+              dayOfYear={currentReflection.dayOfYear}
+              category={currentReflection.category}
+              selectedCategory={selectedCategory}
+              onCategoryChange={handleCategoryChange}
+              onPrevious={() => moveReflection(-1)}
+              onNext={() => moveReflection(1)}
+              onToday={() => {
+                setSelectedCategory("Todas");
+                setCurrentReflection(getTodayDevotional());
+              }}
+              completedCount={completedDays.length}
             />
 
             <DailyCard
@@ -215,6 +242,8 @@ export default function App() {
               onOpenImagePicker={() => setIsImagePickerOpen(true)}
               onOpenShare={() => setIsShareOpen(true)}
               onOpenImmersive={() => setIsImmersiveOpen(true)}
+              isCompleted={completedDays.includes(currentReflection.id)}
+              onToggleCompleted={() => setCompletedDays((current) => current.includes(currentReflection.id) ? current.filter((id) => id !== currentReflection.id) : [...current, currentReflection.id])}
             />
           </div>
         )}
