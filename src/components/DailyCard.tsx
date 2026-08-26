@@ -54,7 +54,7 @@ export const DailyCard: React.FC<DailyCardProps> = ({
   };
 
   return (
-    <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-stone-800 bg-stone-900 transition-all duration-300">
+    <article className="relative rounded-[1.75rem] overflow-hidden shadow-[0_24px_70px_rgba(65,58,46,0.16)] border border-[#ded5c7] bg-[#fffdfa] transition-all duration-300">
       
       {/* Nature Photo Background Header Banner */}
       <div className="relative h-72 sm:h-96 w-full overflow-hidden flex flex-col justify-between p-6 text-white">
@@ -64,15 +64,15 @@ export const DailyCard: React.FC<DailyCardProps> = ({
           referrerPolicy="no-referrer"
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/60 to-stone-950/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1f2821]/95 via-[#253129]/52 to-[#283329]/25"></div>
 
         {/* Top Badges & Actions */}
         <div className="relative z-10 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="px-3.5 py-1 bg-amber-600/90 backdrop-blur-md text-amber-50 text-xs font-bold rounded-full uppercase tracking-wider shadow-md border border-amber-400/30">
+            <span className="px-3.5 py-1 bg-[#8a6747]/95 backdrop-blur-md text-white text-xs font-bold rounded-full uppercase tracking-wider shadow-md border border-white/20">
               {reflection.dayOfWeekName}
             </span>
-            <span className="hidden sm:inline px-3 py-1 bg-stone-900/70 backdrop-blur-md text-stone-300 text-xs font-medium rounded-full border border-stone-700/50">
+            <span className="hidden sm:inline px-3 py-1 bg-[#263229]/70 backdrop-blur-md text-white/90 text-xs font-medium rounded-full border border-white/20">
               {reflection.theme}
             </span>
           </div>
@@ -114,10 +114,10 @@ export const DailyCard: React.FC<DailyCardProps> = ({
             <BookOpen className="w-3.5 h-3.5" />
             <span>Versículo Diário — Almeida Revista e Atualizada (ARA)</span>
           </div>
-          <h2 className="text-lg sm:text-2xl font-serif font-bold text-amber-50 leading-relaxed drop-shadow-md">
-            "{reflection.verseText}"
+          <h2 className="text-lg sm:text-2xl font-serif font-bold text-[#fffaf0] leading-relaxed drop-shadow-md max-w-3xl">
+            “{reflection.verseText}”
           </h2>
-          <p className="text-xs sm:text-sm font-bold text-emerald-300 tracking-wide mt-2 text-right">
+          <p className="text-xs sm:text-sm font-bold text-[#dcebcf] tracking-wide mt-2 text-right">
             — {reflection.verseReference}
           </p>
         </div>
@@ -133,16 +133,16 @@ export const DailyCard: React.FC<DailyCardProps> = ({
       </div>
 
       {/* Main Reflection Body */}
-      <div className="p-6 sm:p-8 space-y-6">
+      <div className="p-6 sm:p-8 space-y-7">
 
         {/* Action Toolbar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 p-3 bg-stone-950/80 rounded-2xl border border-stone-800">
+        <div className="flex flex-wrap items-center justify-between gap-3 p-3 bg-[#f6f1e8] rounded-2xl border border-[#e0d6c8]">
           <button
             onClick={handleSpeechToggle}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
               isSpeechReading
                 ? "bg-amber-500 text-stone-950 shadow-md animate-pulse"
-                : "bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-700"
+                : "bg-white hover:bg-[#eee8de] text-[#55564d] border border-[#d8cfc2]"
             }`}
           >
             {isSpeechReading ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-amber-400" />}
@@ -152,7 +152,7 @@ export const DailyCard: React.FC<DailyCardProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={onOpenShare}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-300 text-xs font-semibold transition"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#e6ede4] hover:bg-[#dbe6d9] border border-[#b6c8b5] text-[#3f5a44] text-xs font-semibold transition"
             >
               <Share2 className="w-4 h-4" />
               <span>Compartilhar</span>
@@ -162,35 +162,35 @@ export const DailyCard: React.FC<DailyCardProps> = ({
 
         {/* Title */}
         <div>
-          <h3 className="text-xl sm:text-2xl font-serif font-bold text-amber-100">
+          <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#504638]">
             {reflection.title}
           </h3>
-          <p className="text-xs text-amber-400/80 font-medium mt-1">
+          <p className="text-xs text-[#8a6747] font-medium mt-1">
             Tema de Fé: {reflection.theme}
           </p>
         </div>
 
         {/* Reflection Paragraphs */}
-        <div className="text-stone-300 text-sm sm:text-base leading-relaxed space-y-4">
+        <div className="text-[#5d5e55] text-sm sm:text-base leading-7 space-y-4">
           <p>{reflection.reflectionText}</p>
         </div>
 
         {/* Prayer Section */}
-        <div className="bg-stone-950/90 border border-amber-900/40 rounded-2xl p-5 shadow-lg relative overflow-hidden">
+        <div className="bg-[#f1eadf] border border-[#dccbb4] rounded-2xl p-5 shadow-sm relative overflow-hidden">
           <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 rounded-full blur-2xl pointer-events-none"></div>
           
           <div className="flex items-center justify-between mb-3">
-            <h4 className="text-sm font-serif font-bold text-amber-200 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-amber-400" />
+            <h4 className="text-sm font-serif font-bold text-[#76583d] flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-[#a67b4d]" />
               Oração para o Dia de Hoje
             </h4>
-            <span className="text-[10px] text-amber-400/70 uppercase tracking-widest font-mono">
+            <span className="text-[10px] text-[#9b7958] uppercase tracking-widest font-mono">
               Comunhão
             </span>
           </div>
 
-          <p className="text-xs sm:text-sm font-serif italic text-amber-100/90 leading-relaxed">
-            "{reflection.prayer}"
+          <p className="text-sm font-serif italic text-[#5a4c3d] leading-relaxed">
+            “{reflection.prayer}”
           </p>
         </div>
 
@@ -200,15 +200,15 @@ export const DailyCard: React.FC<DailyCardProps> = ({
           className={`p-4 rounded-2xl border transition cursor-pointer flex items-center gap-3.5 ${
             isCompletedAction
               ? "bg-emerald-950/60 border-emerald-500 text-emerald-100"
-              : "bg-stone-950/60 border-stone-800 text-stone-300 hover:border-stone-700"
+              : "bg-[#f8f5ef] border-[#ded5c7] text-[#5d5e55] hover:border-[#b9a98f]"
           }`}
         >
-          <div className={`p-2 rounded-xl shrink-0 ${isCompletedAction ? "bg-emerald-600 text-white" : "bg-stone-800 text-stone-400"}`}>
+          <div className={`p-2 rounded-xl shrink-0 ${isCompletedAction ? "bg-emerald-600 text-white" : "bg-[#e9e3d8] text-[#77736a]"}`}>
             <CheckCircle2 className="w-5 h-5" />
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#8a6747]">
                 Atitude Prática do Dia
               </span>
               {isCompletedAction && (
@@ -222,6 +222,6 @@ export const DailyCard: React.FC<DailyCardProps> = ({
         </div>
 
       </div>
-    </div>
+    </article>
   );
 };

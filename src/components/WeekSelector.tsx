@@ -1,6 +1,6 @@
 import React from "react";
 import { DayOfWeekName } from "../types";
-import { Sun, Calendar as CalendarIcon, Check } from "lucide-react";
+import { Calendar as CalendarIcon } from "lucide-react";
 
 interface WeekSelectorProps {
   selectedDayCode: number; // 0..6
@@ -24,14 +24,14 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({
   todayCode,
 }) => {
   return (
-    <div className="bg-stone-900/80 backdrop-blur-md rounded-2xl p-4 border border-stone-800 shadow-xl mb-6">
+    <div className="bg-white/75 backdrop-blur-md rounded-2xl p-4 border border-[#ded5c7] shadow-[0_10px_35px_rgba(72,67,54,0.08)] mb-6">
       <div className="flex items-center justify-between mb-3 px-1">
-        <h3 className="text-sm font-semibold text-stone-300 flex items-center gap-2">
-          <CalendarIcon className="w-4 h-4 text-amber-400" />
+        <h3 className="text-sm font-semibold text-[#55564d] flex items-center gap-2">
+          <CalendarIcon className="w-4 h-4 text-[#8a6747]" />
           Selecione o Dia da Semana
         </h3>
-        <span className="text-xs text-stone-400">
-          Tradução Bíblica: <strong className="text-amber-300">Almeida Revista e Atualizada (ARA)</strong>
+        <span className="hidden sm:inline text-xs text-[#77736a]">
+          Tradução: <strong className="text-[#76583d]">Almeida Revista e Atualizada</strong>
         </span>
       </div>
 
@@ -46,10 +46,10 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({
               onClick={() => onSelectDayCode(day.code)}
               className={`relative flex flex-col items-center justify-center py-3 px-1 rounded-xl transition-all duration-200 group ${
                 isSelected
-                  ? "bg-amber-700/90 text-white shadow-lg shadow-amber-900/30 border border-amber-500 scale-[1.02]"
+                  ? "bg-[#76583d] text-white shadow-lg shadow-[#76583d]/20 border border-[#8a6747] -translate-y-0.5"
                   : isToday
-                  ? "bg-stone-800 text-stone-200 border border-emerald-500/60 hover:bg-stone-750"
-                  : "bg-stone-800/50 text-stone-400 border border-stone-800 hover:bg-stone-800 hover:text-stone-200"
+                  ? "bg-[#eef2eb] text-[#3e5943] border border-[#91ab93] hover:bg-[#e4ebe2]"
+                  : "bg-[#f8f5ef] text-[#777369] border border-[#e1d8cc] hover:bg-[#eee8de] hover:text-[#484940]"
               }`}
             >
               {isToday && (
@@ -65,7 +65,7 @@ export const WeekSelector: React.FC<WeekSelectorProps> = ({
               </span>
 
               {isSelected && (
-                <div className="absolute bottom-1 w-1.5 h-1.5 bg-amber-300 rounded-full"></div>
+                <div className="absolute bottom-1 w-1.5 h-1.5 bg-[#f2d49c] rounded-full"></div>
               )}
             </button>
           );
