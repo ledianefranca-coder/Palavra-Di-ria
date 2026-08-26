@@ -1,5 +1,4 @@
 import { DailyReflection, DayOfWeekName, DevotionalCategory, NatureCategory } from "../types";
-import { NATURE_IMAGE_GALLERY } from "./natureImages";
 
 type PassageSeed = {
   title: string;
@@ -67,6 +66,16 @@ const LENSES: DailyLens[] = [
   { category: "Para dormir", title: "Noite de proteção", invitation: "Você pode fechar os olhos sem fechar o coração para a confiança: a presença de Deus envolve sua casa.", action: "Ore por cada pessoa do seu lar e encerre o dia sem consultar novamente as preocupações." },
 ];
 
+const CATEGORY_BACKGROUNDS: Record<DevotionalCategory, { url: string; location: string }> = {
+  Paz: { url: "https://images.unsplash.com/photo-1522383225653-ed111181a951?q=82&w=1920&auto=format&fit=crop", location: "Flores de cerejeira sob luz suave" },
+  Coragem: { url: "https://images.unsplash.com/photo-1470509037663-253afd7f0f51?q=82&w=1920&auto=format&fit=crop", location: "Girassóis voltados para a luz" },
+  Gratidão: { url: "https://images.unsplash.com/photo-1531058240690-006c446962d8?q=82&w=1920&auto=format&fit=crop", location: "Orquídeas em florescimento" },
+  Recomeço: { url: "https://images.unsplash.com/photo-1527061011665-3652c757a4d4?q=82&w=1920&auto=format&fit=crop", location: "Margaridas renovadas pela manhã" },
+  Esperança: { url: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?q=82&w=1920&auto=format&fit=crop", location: "Flores vivas sob a luz do dia" },
+  Família: { url: "https://images.unsplash.com/photo-1496062031456-07b8f162a322?q=82&w=1920&auto=format&fit=crop", location: "Rosas reunidas em um jardim" },
+  "Para dormir": { url: "https://images.unsplash.com/photo-1499002238440-d264edd596ec?q=82&w=1920&auto=format&fit=crop", location: "Lavandas ao cair da noite" },
+};
+
 function dateForDay(day: number) {
   const date = new Date(2025, 0, day);
   return `${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
@@ -77,8 +86,7 @@ export const ANNUAL_DEVOTIONALS: DailyReflection[] = Array.from({ length: 365 },
   const passage = PASSAGES[index % PASSAGES.length];
   const lens = LENSES[Math.floor(index / PASSAGES.length) % LENSES.length];
   const calendarDate = new Date(2025, 0, day);
-  const imageOptions = NATURE_IMAGE_GALLERY.filter((image) => image.category === passage.image);
-  const image = imageOptions[Math.floor(index / PASSAGES.length) % imageOptions.length] || NATURE_IMAGE_GALLERY[0];
+  const image = CATEGORY_BACKGROUNDS[lens.category];
 
   return {
     id: `dev-${String(day).padStart(3, "0")}`,
@@ -94,7 +102,7 @@ export const ANNUAL_DEVOTIONALS: DailyReflection[] = Array.from({ length: 365 },
     reflectionText: `${passage.truth} ${lens.invitation} Esta é a palavra preparada para o ${day}º dia da sua caminhada anual.`,
     prayer: `Senhor, ${passage.prayerFocus}. Conduze meu coração nesta palavra e ajuda-me a vivê-la com sinceridade. Amém.`,
     practicalAction: `${lens.action} Ao concluir, marque esta atitude como realizada no seu ${day}º dia.`,
-    bgCategory: passage.image,
+    bgCategory: "flores",
     bgImageUrl: image.url,
     bgLocation: image.location,
     tags: [lens.category, passage.title, "Devocional anual"],
