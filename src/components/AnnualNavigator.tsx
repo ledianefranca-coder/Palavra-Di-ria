@@ -6,6 +6,17 @@ const CATEGORIES: DevotionalCategory[] = [
   "Paz", "Coragem", "Gratidão", "Recomeço", "Esperança", "Família", "Para dormir",
 ];
 
+const CATEGORY_FLOWERS: Record<DevotionalCategory | "Todas", { flower: string; label: string }> = {
+  Todas: { flower: "💐", label: "Todas" },
+  Paz: { flower: "🌸", label: "Paz" },
+  Coragem: { flower: "🌻", label: "Coragem" },
+  Gratidão: { flower: "🌷", label: "Gratidão" },
+  Recomeço: { flower: "🌼", label: "Recomeço" },
+  Esperança: { flower: "🌺", label: "Esperança" },
+  Família: { flower: "🌹", label: "Família" },
+  "Para dormir": { flower: "🪻", label: "Para dormir" },
+};
+
 interface AnnualNavigatorProps {
   dateKey?: string;
   dayOfYear?: number;
@@ -51,15 +62,15 @@ export const AnnualNavigator: React.FC<AnnualNavigatorProps> = ({
       <div className="flex gap-2 overflow-x-auto pt-4 pb-1" aria-label="Categorias de reflexão">
         {["Todas", ...CATEGORIES].map((item) => {
           const active = selectedCategory === item;
-          const isSleep = item === "Para dormir";
+          const flower = CATEGORY_FLOWERS[item as DevotionalCategory | "Todas"];
           return (
             <button
               key={item}
               onClick={() => onCategoryChange(item as DevotionalCategory | "Todas")}
               className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-semibold border transition flex items-center gap-1.5 ${active ? "bg-[#46614b] text-white border-[#46614b]" : "bg-[#f8f5ef] text-[#64645b] border-[#dfd6ca] hover:border-[#9aaa98]"}`}
             >
-              {isSleep && <MoonStar className="w-3.5 h-3.5" />}
-              {item}
+              <span aria-hidden="true" className="text-sm leading-none">{flower.flower}</span>
+              {flower.label}
             </button>
           );
         })}
